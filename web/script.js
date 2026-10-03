@@ -3,7 +3,7 @@ import {
   ref,
   set,
   onValue,
-} from "./firebase.js";
+} from "./firebase-config.example.js";
 
 const ESP32_IP = "YOUR_ESP32_IP"; // CHANGE THIS
 const ESP32_URL = `http://${ESP32_IP}`;
