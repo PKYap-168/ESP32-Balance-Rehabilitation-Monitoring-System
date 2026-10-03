@@ -1,0 +1,542 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f4f7;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.connection {
+  margin-bottom: 30px;
+}
+
+.status-section {
+  margin-bottom: 25px;
+}
+
+.status-section p {
+  margin-bottom: 5px;
+}
+
+#balanceStatus {
+  font-size: 32px;
+  margin-top: 5px;
+}
+
+.balance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.value-box {
+  background: #f6f6f6;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.value-box p {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.metric {
+  margin: 20px 0;
+}
+
+.buttons {
+  margin-top: 25px;
+}
+
+button {
+  width: 100%;
+  padding: 13px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.start {
+  background: #2e7d32;
+  color: white;
+}
+
+.calibrate {
+  background: #f9a825;
+}
+
+.stop {
+  background: #c62828;
+  color: white;
+}
+
+.simulation {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.simulation button {
+  background: #e9ecef;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.start,
+.calibrate,
+.stop {
+    transition: 
+        transform 0.1s ease,
+        opacity 0.2s ease;
+}
+
+.analysis-card {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 15px;
+}
+
+.analysis-card h3 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+.analysis-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.analysis-row:last-child {
+  border-bottom: none;
+}
+
+.performance-row {
+  margin-top: 8px;
+  padding-top: 15px;
+  font-size: 18px;
+}
+
+/* ========================================
+   PATIENT SELECTION
+======================================== */
+
+.patient-section {
+  margin-bottom: 25px;
+  padding: 18px;
+  background: #f5f5f5;
+  border-radius: 15px;
+  text-align: left;
+}
+
+.patient-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.patient-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.patient-section select,
+.patient-section input {
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
+}
+
+#selectedPatientDisplay {
+  text-align: center;
+  font-weight: bold;
+  margin: 5px 0 15px;
+}
+
+.add-patient-button {
+  background: #1565c0;
+  color: white;
+}
+
+.create-patient-button {
+  background: #2e7d32;
+  color: white;
+}
+
+.cancel-patient-button {
+  background: #757575;
+  color: white;
+}
+
+.patient-form {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ========================================
+   MAIN NAVIGATION
+======================================== */
+
+.top-menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.menu-button {
+  background: #e9ecef;
+  color: #333;
+  font-weight: bold;
+}
+
+.menu-button.active-menu {
+  background: #1565c0;
+  color: white;
+}
+
+
+/* ========================================
+   HISTORY VIEW
+======================================== */
+
+.history-header {
+  margin-bottom: 20px;
+}
+
+.history-header h2 {
+  margin-bottom: 8px;
+}
+
+#historyPatientDisplay {
+  color: #1565c0;
+}
+
+.history-summary {
+  padding: 15px;
+  margin-bottom: 20px;
+  background: #f5f5f5;
+  border-radius: 12px;
+}
+
+.history-summary p {
+  margin: 0;
+}
+
+
+/* ========================================
+   HISTORY SESSION CARD
+======================================== */
+
+.history-session {
+  margin-bottom: 18px;
+  padding: 18px;
+  background: #f5f5f5;
+  border-radius: 14px;
+  text-align: left;
+}
+
+.history-session h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.history-session-time {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #666;
+  font-size: 14px;
+}
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.history-row:last-child {
+  border-bottom: none;
+}
+
+.history-row strong {
+  text-align: right;
+}
+
+
+/* ========================================
+   HISTORY EMPTY STATE
+======================================== */
+
+.history-empty {
+  padding: 25px 10px;
+  color: #777;
+  text-align: center;
+}
+
+
+/* ========================================
+   DISCLAIMER
+======================================== */
+
+.history-disclaimer {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ========================================
+   PROGRESS TRENDS
+======================================== */
+
+.progress-trends {
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+
+.progress-trends > h2 {
+  margin-bottom: 5px;
+}
+
+.progress-description {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+
+/* ========================================
+   CHART CARDS
+======================================== */
+
+.chart-card {
+  margin-bottom: 20px;
+  padding: 18px;
+  background: #f5f5f5;
+  border-radius: 14px;
+  text-align: left;
+}
+
+.chart-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.chart-title-row h3 {
+  margin: 0;
+}
+
+.trend-guide {
+  font-size: 12px;
+  color: #666;
+}
+
+
+/* ========================================
+   CHART AREA
+======================================== */
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 260px;
+}
+
+.graph-message {
+  margin-top: 10px;
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+}
+
+/* ========================================
+   PROGRESS ASSESSMENT
+======================================== */
+
+.progress-assessment {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.progress-assessment > h2 {
+  margin-bottom: 5px;
+}
+
+.assessment-description {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #666;
+  font-size: 14px;
+}
+
+
+/* ========================================
+   ASSESSMENT STATUS
+======================================== */
+
+.assessment-status-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px;
+
+  background: #f5f5f5;
+
+  border-radius: 14px;
+
+  margin-bottom: 15px;
+}
+
+.assessment-label {
+  font-weight: bold;
+}
+
+.assessment-status {
+  font-size: 18px;
+}
+
+
+/* ========================================
+   ASSESSMENT METRICS
+======================================== */
+
+.assessment-metrics {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+.assessment-metric {
+  padding: 15px;
+
+  background: #f5f5f5;
+
+  border-radius: 12px;
+
+  text-align: center;
+}
+
+.assessment-metric span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+
+  color: #666;
+}
+
+.assessment-metric strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 17px;
+}
+
+.assessment-metric small {
+  color: #666;
+}
+
+
+/* ========================================
+   SYSTEM SUGGESTION
+======================================== */
+
+.system-suggestion {
+  padding: 18px;
+
+  background: #f5f5f5;
+
+  border-radius: 14px;
+
+  text-align: left;
+}
+
+.system-suggestion h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.system-suggestion p {
+  margin-bottom: 0;
+
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   ASSESSMENT DISCLAIMER
+======================================== */
+
+.assessment-disclaimer {
+  margin-top: 12px;
+
+  color: #777;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
