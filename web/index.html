@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Balance Rehabilitation System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Balance Rehabilitation System</h1>
+
+      <div class="top-menu">
+
+        <button id="dashboardMenuButton" class="menu-button active-menu">
+          DASHBOARD
+        </button>
+
+        <button id="historyMenuButton" class="menu-button">
+          HISTORY
+        </button>
+
+      </div>
+
+      <div id="dashboardView">
+
+        <p class="connection">
+          ESP32 Status: <span id="connectionStatus">Simulation Mode</span>
+        </p>
+
+        <!-- PATIENT SELECTION -->
+
+        <div class="patient-section">
+
+          <h3>Patient</h3>
+
+          <label for="patientSelect">
+            Current Patient
+          </label>
+
+          <select id="patientSelect">
+            <option value="">
+              Select Patient
+            </option>
+          </select>
+
+          <p id="selectedPatientDisplay">
+            No patient selected
+          </p>
+
+          <button id="showAddPatientButton" class="add-patient-button">
+            ADD NEW PATIENT
+          </button>
+
+          <div id="addPatientForm" class="patient-form hidden">
+            <input type="text" placeholder="Patient ID e.g. PATIENT001" id="newPatientId">
+            <input type="text" placeholder="Patient Name" id="newPatientName">
+
+            <button id="createPatientButton" class="create-patient-button">
+              CREATE PATIENT
+            </button>
+
+            <button id="cancelPatientButton" class="cancel-patient-button">
+              CANCEL
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="status-section">
+          <p>Balance Status</p>
+          <h2 id="balanceStatus">BALANCED</h2>
+        </div>
+
+        <div class="balance-grid">
+          <div class="value-box">
+            <h3>LEFT</h3>
+            <p><span id="leftValue">50.0</span>%</p>
+          </div>
+
+          <div class="value-box">
+            <h3>RIGHT</h3>
+            <p><span id="rightValue">50.0</span>%</p>
+          </div>
+        </div>
+
+        <div class="analysis-card">
+          <h3>Session Analysis</h3>
+
+          <div class="analysis-row">
+            <span>Current ASI</span>
+            <span><span id="currentASI">--</span> %</span>
+          </div>
+
+          <div class="analysis-row">
+            <span>Average ASI</span>
+            <span><span id="averageASI">--</span> %</span>
+          </div>
+
+          <div class="analysis-row">
+            <span>Maximum ASI</span>
+            <span><span id="maximumASI">--</span> %</span>
+          </div>
+
+          <div class="analysis-row">
+            <span>Balanced Time</span>
+            <span><span id="balancedTime">--</span> %</span>
+          </div>
+
+          <div class="analysis-row performance-row">
+            <span>Session Performance</span>
+            <strong>
+              <span id="stabilityScore">--</span> / 100
+            </strong>
+          </div>
+        </div>
+
+
+        <div class="metric">
+          <p>Session Time</p>
+          <h2 id="sessionTimer">00:00</h2>
+        </div>
+
+        <div class="buttons">
+          <button id="startButton" class="start">START SESSION</button>
+          <button id="calibrateButton" class="calibrate">CALIBRATE</button>
+          <button id="stopButton" class="stop">END SESSION</button>
+        </div>
+
+      </div>
+      <!-- END DASHBOARD VIEW -->
+
+      <!-- HISTORY VIEW -->
+      <div id="historyView" class="hidden">
+
+        <div class="history-header">
+
+          <h2>Balance History</h2>
+
+          <p>
+            Patient:
+            <strong id="historyPatientDisplay">
+              No patient selected
+            </strong>
+
+          </p>
+
+        </div>
+
+        <div id="historySummary" class="history-summary">
+          <p>
+            Select a patient from the Dashboad to view previous balance rehabilitation sessions.
+          </p>
+        </div>
+
+        <!-- ========================================
+     PROGRESS TRENDS
+========================================= -->
+
+        <div id="progressTrendsSection" class="progress-trends">
+
+          <h2>Balance Progress</h2>
+
+          <p class="progress-description">
+            Changes in recorded balance performance
+            across rehabilitation sessions.
+          </p>
+
+
+          <!-- Average ASI Graph -->
+          <div class="chart-card">
+
+            <div class="chart-title-row">
+              <h3>Average ASI</h3>
+              <span class="trend-guide">
+                Lower is better
+              </span>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="averageASIChart"></canvas>
+            </div>
+
+          </div>
+
+
+          <!-- Balanced Time Graph -->
+          <div class="chart-card">
+
+            <div class="chart-title-row">
+              <h3>Balanced Time</h3>
+              <span class="trend-guide">
+                Higher is better
+              </span>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="balancedTimeChart"></canvas>
+            </div>
+
+          </div>
+
+
+          <!-- Performance Graph -->
+          <div class="chart-card">
+
+            <div class="chart-title-row">
+              <h3>Performance Score</h3>
+              <span class="trend-guide">
+                Higher is better
+              </span>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="performanceChart"></canvas>
+            </div>
+
+          </div>
+
+
+          <p id="graphMessage" class="graph-message">
+          </p>
+
+        </div>
+
+        <!-- ========================================
+     PROGRESS ASSESSMENT
+========================================= -->
+
+        <div id="progressAssessment" class="progress-assessment">
+
+          <h2>Progress Assessment</h2>
+
+          <p class="assessment-description">
+            Assessment based on the three most recent
+            recorded balance sessions.
+          </p>
+
+
+          <div class="assessment-status-card">
+
+            <span class="assessment-label">
+              Recent Trend
+            </span>
+
+            <strong id="assessmentStatus" class="assessment-status">
+              Insufficient Data
+            </strong>
+
+          </div>
+
+
+          <div class="assessment-metrics">
+
+            <div class="assessment-metric">
+
+              <span>Average ASI</span>
+
+              <strong id="assessmentASI">
+                --
+              </strong>
+
+              <small id="assessmentASITrend">
+                --
+              </small>
+
+            </div>
+
+
+            <div class="assessment-metric">
+
+              <span>Balanced Time</span>
+
+              <strong id="assessmentBalancedTime">
+                --
+              </strong>
+
+              <small id="assessmentBalancedTrend">
+                --
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="system-suggestion">
+
+            <h3>System Suggestion</h3>
+
+            <p id="systemSuggestionText">
+              At least three sessions are required
+              before a progress trend is assessed.
+            </p>
+
+          </div>
+
+
+          <p class="assessment-disclaimer">
+            Progress assessments and suggestions are
+            generated from recorded balance-session
+            trends and are not clinical diagnoses or
+            treatment recommendations.
+          </p>
+
+        </div>
+
+        <div id="historyList"></div>
+
+        <p class="history-disclaimer">
+          Historical results are provided for progress monitoring
+          and are not clinical treatment recommendations.
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Chart.js for progress graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
