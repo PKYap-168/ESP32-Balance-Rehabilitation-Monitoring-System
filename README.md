@@ -73,6 +73,15 @@ Firebase Realtime Database
   <em>Overall system architecture of the Balance Rehabilitation Monitoring and Control System.</em>
 </p>
 
+<p align="center">
+  <img width="425" height="943" alt="image" src="https://github.com/user-attachments/assets/dc4eac1e-1f7f-423e-8501-1852b5103fd1" />
+
+</p>
+
+<p align="center">
+  <em>Software architecture of the system.</em>
+</p>
+
 ## Hardware Used
 
 <div align="center">
@@ -318,6 +327,14 @@ Each session can include:
 
 This allows the therapist to examine individual sessions in detail while also reviewing the overall rehabilitation trend.
 
+<p align="center">
+  <img width="633" height="645" alt="image" src="https://github.com/user-attachments/assets/78a42647-64b0-4811-91c4-b782782a2e90" />
+
+</p>
+
+<p align="center">
+  <em>Numerical history of completed rehabilitation sessions for the selected patient.</em>
+</p>
 
 
 ## Testing Results
